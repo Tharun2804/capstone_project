@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <a href="#" id="logoutBtn">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <div id="statusMessage"></div>
+        <h2>Manage Textbooks</h2>
+        <form id="addBookForm">
+            <input type="text" id="bookTitle" placeholder="Title" required>
+            <input type="text" id="bookAuthor" placeholder="Author" required>
+            <input type="number" id="bookYear" placeholder="Year" required>
+            <button type="submit">Add Book</button>
+        </form>
+
+        <div id="booksList">
+            <h3>All Textbooks</h3>
+            <ul id="booksUl"></ul>
+        </div>
+        
+        <div id="editBookContainer" style="display:none;">
+            <h3>Edit Book</h3>
+            <form id="editBookForm">
+                <input type="hidden" id="editBookId">
+                <input type="text" id="editBookTitle" placeholder="Title" required>
+                <input type="text" id="editBookAuthor" placeholder="Author" required>
+                <input type="number" id="editBookYear" placeholder="Year" required>
+                <div class="button-group">
+                    <button type="submit">Save Changes</button>
+                    <button type="button" id="cancelEdit">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="reviewerApplicationsContainer">
+            <h2>📋 Reviewer Applications</h2>
+            <div id="reviewerApplicationsList">
+                <div id="applicationsLoading" style="text-align: center; padding: 20px; color: #666;">
+                    Loading reviewer applications...
+                </div>
+                <ul id="applicationsUl"></ul>
+                <div id="noApplications" style="display: none; text-align: center; padding: 20px; color: #666;">
+                    No reviewer applications found.
+                </div>
+            </div>
+        </div>
+
+        <div id="assignBookContainer">
+            <h3>Assign Books to Reviewers</h3>
+            <form id="assignForm">
+                <label for="assignBookSelect">Select a Textbook:</label>
+                <select id="assignBookSelect" required></select>
+                
+                <label for="assignReviewerSelect">Select a Reviewer:</label>
+                <select id="assignReviewerSelect" required></select>
+                
+                <button type="submit">Assign Book</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

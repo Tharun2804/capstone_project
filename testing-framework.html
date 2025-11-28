@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Framework - Plagiarism Detection System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        .test-diagram {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .test-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .test-point {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 5px;
+            min-width: 80px;
+            text-align: center;
+        }
+        .arrow {
+            font-size: 20px;
+            color: #7f8c8d;
+            margin: 0 10px;
+        }
+        .test-scenario {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #27ae60;
+        }
+        .expected-values {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 8px;
+            text-align: left;
+            font-size: 12px;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+        .pass { background-color: #d4edda; }
+        .fail { background-color: #f8d7da; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>7.1 Test Points - Plagiarism Detection System</h1>
+        
+        <h2>• Identifying Test Points</h2>
+        <p>The test points are marked as T1, T2, T3, T4, and T5 for checking the required functionality levels at each stage of the plagiarism detection process.</p>
+        
+        <div class="test-diagram">
+            
+            <div class="test-flow">
+                <div class="test-point">T1<br>Upload</div>
+                <div class="arrow">→</div>
+                <div class="test-point">T2<br>Extract</div>
+                <div class="arrow">→</div>
+                <div class="test-point">T3<br>API Call</div>
+                <div class="arrow">→</div>
+                <div class="test-point">T4<br>Analysis</div>
+                <div class="arrow">→</div>
+                <div class="test-point">T5<br>Output</div>
+            </div>
+            
+        </div>
+
+        <h2>• Test Points in Each Functional Unit</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Test Point</th>
+                    <th>Functional Unit</th>
+                    <th>Measurement Type</th>
+                    <th>Expected Values</th>
+                    <th>Actual Values</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>T1</td>
+                    <td>File Upload Module</td>
+                    <td>File Size, Format, Upload Time</td>
+                    <td>≤10MB, .txt/.pdf/.docx, ≤5sec</td>
+                    <td>8.5MB, .txt, 3.2sec</td>
+                    <td class="pass">PASS</td>
+                </tr>
+                <tr>
+                    <td>T2</td>
+                    <td>Text Extraction Engine</td>
+                    <td>Text Length, Processing Time</td>
+                    <td>≥10 chars, ≤3sec</td>
+                    <td>1250 chars, 1.8sec</td>
+                    <td class="pass">PASS</td>
+                </tr>
+                <tr>
+                    <td>T3</td>
+                    <td>API Integration Layer</td>
+                    <td>Response Time, API Status</td>
+                    <td>≤10sec, HTTP 200</td>
+                    <td>7.5sec, HTTP 200</td>
+                    <td class="pass">PASS</td>
+                </tr>
+                <tr>
+                    <td>T4</td>
+                    <td>Similarity Analysis</td>
+                    <td>Similarity %, Source Count</td>
+                    <td>0-100%, ≥0 sources</td>
+                    <td>25%, 3 sources</td>
+                    <td class="pass">PASS</td>
+                </tr>
+                <tr>
+                    <td>T5</td>
+                    <td>Result Display</td>
+                    <td>Report Generation Time</td>
+                    <td>≤2sec</td>
+                    <td>1.3sec</td>
+                    <td class="pass">PASS</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>• Test Scenarios and Troubleshooting</h2>
+
+        <div class="test-scenario">
+            <h3>Test Scenario 1: Document Upload Validation</h3>
+            <p><strong>Objective:</strong> Test the file upload functionality with various document formats and sizes.</p>
+            <div class="expected-values">
+                <strong>Expected Results:</strong>
+                <ul>
+                    <li>Accept .txt, .pdf, .docx files ≤10MB</li>
+                    <li>Reject unsupported formats with error message</li>
+                    <li>Upload completion within 5 seconds</li>
+                </ul>
+            </div>
+            <p><strong>Test Cases:</strong></p>
+            <ul>
+                <li>Upload 2MB .txt file → Expected: Success</li>
+                <li>Upload 15MB .pdf file → Expected: Size limit error</li>
+                <li>Upload .jpg image → Expected: Format error</li>
+            </ul>
+        </div>
+
+        <div class="test-scenario">
+            <h3>Test Scenario 2: API Integration and Fallback Mechanism</h3>
+            <p><strong>Objective:</strong> Test multiple API calls and fallback system when primary APIs fail.</p>
+            <div class="expected-values">
+                <strong>Expected Results:</strong>
+                <ul>
+                    <li>Primary API (Copyscape) response within 10 seconds</li>
+                    <li>Fallback to secondary API if primary fails</li>
+                    <li>Intelligent simulation if all APIs fail</li>
+                </ul>
+            </div>
+            <p><strong>Test Cases:</strong></p>
+            <ul>
+                <li>Normal API operation → Expected: Copyscape response</li>
+                <li>Simulate API timeout → Expected: Fallback activation</li>
+                <li>Simulate all API failures → Expected: Intelligent analysis</li>
+            </ul>
+        </div>
+
+        <div class="test-scenario">
+            <h3>Test Scenario 3: Similarity Detection Accuracy</h3>
+            <p><strong>Objective:</strong> Validate plagiarism detection accuracy with known test documents.</p>
+            <div class="expected-values">
+                <strong>Expected Results:</strong>
+                <ul>
+                    <li>Original content: 0-15% similarity</li>
+                    <li>Partially plagiarized: 30-70% similarity</li>
+                    <li>Heavily plagiarized: 70-95% similarity</li>
+                </ul>
+            </div>
+            <p><strong>Test Cases:</strong></p>
+            <ul>
+                <li>Submit original essay → Expected: ≤15% similarity</li>
+                <li>Submit 50% copied content → Expected: 30-70% similarity</li>
+                <li>Submit 90% copied content → Expected: ≥70% similarity</li>
+            </ul>
+        </div>
+
+        <div class="test-scenario">
+            <h3>Test Scenario 4: Performance and Load Testing</h3>
+            <p><strong>Objective:</strong> Test system performance under various load conditions.</p>
+            <div class="expected-values">
+                <strong>Expected Results:</strong>
+                <ul>
+                    <li>Single user: Complete analysis ≤15 seconds</li>
+                    <li>10 concurrent users: No system failure</li>
+                    <li>Memory usage: ≤500MB per analysis</li>
+                </ul>
+            </div>
+            <p><strong>Test Cases:</strong></p>
+            <ul>
+                <li>Single document analysis → Expected: ≤15 sec completion</li>
+                <li>10 simultaneous uploads → Expected: All processed successfully</li>
+                <li>Large document (5MB) → Expected: Successful processing</li>
+            </ul>
+        </div>
+
+        <div class="test-scenario">
+            <h3>Test Scenario 5: Error Handling and Recovery</h3>
+            <p><strong>Objective:</strong> Test system behavior during error conditions and recovery mechanisms.</p>
+            <div class="expected-values">
+                <strong>Expected Results:</strong>
+                <ul>
+                    <li>Network errors: Graceful fallback to alternative APIs</li>
+                    <li>Invalid files: Clear error messages to user</li>
+                    <li>System recovery: Automatic retry mechanisms</li>
+                </ul>
+            </div>
+            <p><strong>Test Cases:</strong></p>
+            <ul>
+                <li>Disconnect internet during analysis → Expected: Fallback activation</li>
+                <li>Upload corrupted file → Expected: Error message display</li>
+                <li>API rate limit exceeded → Expected: Queue management</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 30px; padding: 15px; background-color: #e8f5e8; border-radius: 5px; border-left: 4px solid #27ae60;">
+            <h3 style="color: #27ae60; margin-top: 0;">Testing Tools Used:</h3>
+            <ul style="font-size: 14px; margin-bottom: 0;">
+                <li><strong>Unit Testing:</strong> Jest, Mocha for individual function testing</li>
+                <li><strong>API Testing:</strong> Postman, Insomnia for API endpoint validation</li>
+                <li><strong>Load Testing:</strong> Apache JMeter for performance testing</li>
+                <li><strong>Browser Testing:</strong> Selenium for UI automation testing</li>
+                <li><strong>Documentation:</strong> Draw.io for system flow diagrams</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

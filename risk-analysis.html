@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextbookQA Project - Risk Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+        
+        .table-caption {
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #2c3e50;
+        }
+        
+        .risk-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12px;
+        }
+        
+        .risk-table th,
+        .risk-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .risk-table th {
+            background-color: #e74c3c;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .risk-id {
+            text-align: center !important;
+            font-weight: bold;
+            width: 60px;
+        }
+        
+        .risk-high {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        
+        .risk-medium {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .risk-low {
+            background-color: #e8f5e8;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .probability-high {
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .probability-medium {
+            background-color: #ff9800;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .probability-low {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .impact-high {
+            background-color: #d32f2f;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .impact-medium {
+            background-color: #f57c00;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .impact-low {
+            background-color: #388e3c;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .description {
+            margin: 15px 0;
+            line-height: 1.6;
+            text-align: justify;
+        }
+        
+        .risk-matrix {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .risk-matrix th,
+        .risk-matrix td {
+            border: 2px solid #333;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .risk-matrix th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        .matrix-high {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .matrix-medium {
+            background-color: #ff9800;
+            color: white;
+        }
+        
+        .matrix-low {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .legend {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+        }
+        
+        .legend-item {
+            display: inline-block;
+            margin: 5px 15px 5px 0;
+        }
+        
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 15px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        
+        .mitigation-box {
+            background-color: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .contingency-box {
+            background-color: #fff3e0;
+            border: 1px solid #ff9800;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TextbookQA Project - Risk Analysis</h1>
+        
+        <h2>4.2 Risk Analysis</h2>
+        
+        <div class="description">
+            Risk analysis is a critical component of project management that involves identifying, assessing, and prioritizing potential risks that could impact the TextbookQA project's success. This comprehensive analysis evaluates technical, operational, and external risks, providing mitigation strategies and contingency plans to ensure project delivery within scope, time, and budget constraints.
+        </div>
+
+        <div class="legend">
+            <strong>Risk Assessment Legend:</strong>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #f44336;"></span>
+                High Risk
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #ff9800;"></span>
+                Medium Risk
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #4caf50;"></span>
+                Low Risk
+            </div>
+        </div>
+
+        <h3>Risk Probability and Impact Matrix</h3>
+        <div class="table-caption">Table 4.3: Risk Assessment Matrix</div>
+        <table class="risk-matrix">
+            <thead>
+                <tr>
+                    <th>Impact / Probability</th>
+                    <th>Low (1-3)</th>
+                    <th>Medium (4-6)</th>
+                    <th>High (7-9)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>High (7-9)</th>
+                    <td class="matrix-medium">Medium Risk</td>
+                    <td class="matrix-high">High Risk</td>
+                    <td class="matrix-high">Critical Risk</td>
+                </tr>
+                <tr>
+                    <th>Medium (4-6)</th>
+                    <td class="matrix-low">Low Risk</td>
+                    <td class="matrix-medium">Medium Risk</td>
+                    <td class="matrix-high">High Risk</td>
+                </tr>
+                <tr>
+                    <th>Low (1-3)</th>
+                    <td class="matrix-low">Low Risk</td>
+                    <td class="matrix-low">Low Risk</td>
+                    <td class="matrix-medium">Medium Risk</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Identified Project Risks</h3>
+        <div class="table-caption">Table 4.4: Comprehensive Risk Register</div>
+        <table class="risk-table">
+            <thead>
+                <tr>
+                    <th>Risk ID</th>
+                    <th>Risk Category</th>
+                    <th>Risk Description</th>
+                    <th>Probability</th>
+                    <th>Impact</th>
+                    <th>Risk Level</th>
+                    <th>Mitigation Strategy</th>
+                    <th>Contingency Plan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="risk-high">
+                    <td class="risk-id">R001</td>
+                    <td><strong>Technical</strong></td>
+                    <td>Plagiarism API Integration Failure - External APIs (Copyscape, PlagiarismCheck.org) may become unavailable or change their service terms</td>
+                    <td class="probability-high">High (8)</td>
+                    <td class="impact-high">High (9)</td>
+                    <td><strong>CRITICAL</strong></td>
+                    <td>Implement multiple API fallbacks and develop internal plagiarism detection algorithms</td>
+                    <td>Use intelligent simulation system with enhanced phrase matching and statistical analysis</td>
+                </tr>
+                <tr class="risk-high">
+                    <td class="risk-id">R002</td>
+                    <td><strong>Technical</strong></td>
+                    <td>File Processing Limitations - Current system only fully supports TXT files, limited PDF/DOC text extraction capabilities</td>
+                    <td class="probability-high">High (7)</td>
+                    <td class="impact-high">High (8)</td>
+                    <td><strong>HIGH</strong></td>
+                    <td>Integrate PDF parsing libraries (pdf-parse, mammoth.js) for comprehensive text extraction</td>
+                    <td>Implement OCR technology for image-based PDFs and manual text input option</td>
+                </tr>
+                <tr class="risk-medium">
+                    <td class="risk-id">R003</td>
+                    <td><strong>Security</strong></td>
+                    <td>Data Breach Risk - Sensitive textbook content and user information could be compromised</td>
+                    <td class="probability-medium">Medium (5)</td>
+                    <td class="impact-high">High (9)</td>
+                    <td><strong>HIGH</strong></td>
+                    <td>Implement encryption, secure authentication, regular security audits, and access controls</td>
+                    <td>Incident response plan, data backup recovery, and immediate security patch deployment</td>
+                </tr>
+                <tr class="risk-medium">
+                    <td class="risk-id">R004</td>
+                    <td><strong>Performance</strong></td>
+                    <td>System Scalability Issues - High concurrent user load may cause system performance degradation</td>
+                    <td class="probability-medium">Medium (6)</td>
+                    <td class="impact-medium">Medium (6)</td>
+                    <td><strong>MEDIUM</strong></td>
+                    <td>Implement load balancing, database optimization, and caching mechanisms</td>
+                    <td>Cloud auto-scaling, CDN implementation, and database sharding</td>
+                </tr>
+                <tr class="risk-medium">
+                    <td class="risk-id">R005</td>
+                    <td><strong>Operational</strong></td>
+                    <td>Reviewer Quality Control - Inconsistent review standards and potential bias in textbook evaluations</td>
+                    <td class="probability-medium">Medium (5)</td>
+                    <td class="impact-medium">Medium (7)</td>
+                    <td><strong>MEDIUM</strong></td>
+                    <td>Establish reviewer certification process, standardized evaluation criteria, and peer review validation</td>
+                    <td>Implement AI-assisted review quality checks and multiple reviewer assignment system</td>
+                </tr>
+                <tr class="risk-low">
+                    <td class="risk-id">R006</td>
+                    <td><strong>Legal</strong></td>
+                    <td>Copyright Infringement Claims - Publishers may face legal issues due to false plagiarism detection results</td>
+                    <td class="probability-low">Low (3)</td>
+                    <td class="impact-high">High (8)</td>
+                    <td><strong>MEDIUM</strong></td>
+                    <td>Implement disclaimer clauses, manual verification processes, and legal compliance guidelines</td>
+                    <td>Legal consultation services, insurance coverage, and dispute resolution mechanisms</td>
+                </tr>
+                <tr class="risk-low">
+                    <td class="risk-id">R007</td>
+                    <td><strong>Technical</strong></td>
+                    <td>Database Corruption - MySQL database failure could result in data loss and system downtime</td>
+                    <td class="probability-low">Low (2)</td>
+                    <td class="impact-high">High (9)</td>
+                    <td><strong>MEDIUM</strong></td>
+                    <td>Regular automated backups, database replication, and monitoring systems</td>
+                    <td>Disaster recovery procedures, backup restoration protocols, and alternative database setup</td>
+                </tr>
+                <tr class="risk-low">
+                    <td class="risk-id">R008</td>
+                    <td><strong>Market</strong></td>
+                    <td>Low User Adoption - Educational institutions may be slow to adopt new textbook review systems</td>
+                    <td class="probability-medium">Medium (4)</td>
+                    <td class="impact-medium">Medium (5)</td>
+                    <td><strong>MEDIUM</strong></td>
+                    <td>Comprehensive marketing strategy, pilot programs with universities, and user training sessions</td>
+                    <td>Partnership with educational institutions, incentive programs, and feature enhancement based on feedback</td>
+                </tr>
+                <tr class="risk-low">
+                    <td class="risk-id">R009</td>
+                    <td><strong>Technical</strong></td>
+                    <td>Third-party Dependencies - React.js, Node.js, or other framework updates may break compatibility</td>
+                    <td class="probability-low">Low (3)</td>
+                    <td class="impact-medium">Medium (4)</td>
+                    <td><strong>LOW</strong></td>
+                    <td>Version control, dependency management, and regular compatibility testing</td>
+                    <td>Framework migration plan, alternative technology evaluation, and gradual update strategy</td>
+                </tr>
+                <tr class="risk-low">
+                    <td class="risk-id">R010</td>
+                    <td><strong>Resource</strong></td>
+                    <td>Team Member Unavailability - Key developers may become unavailable during critical project phases</td>
+                    <td class="probability-low">Low (2)</td>
+                    <td class="impact-medium">Medium (6)</td>
+                    <td><strong>LOW</strong></td>
+                    <td>Cross-training team members, comprehensive documentation, and knowledge sharing sessions</td>
+                    <td>Backup developer resources, outsourcing options, and timeline adjustment protocols</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Risk Mitigation Strategies</h3>
+        
+        <div class="mitigation-box">
+            <h4>🛡️ Technical Risk Mitigation</h4>
+            <ul>
+                <li><strong>API Redundancy:</strong> Multiple plagiarism detection APIs with intelligent fallback systems</li>
+                <li><strong>Enhanced File Processing:</strong> Integration of advanced PDF/DOC parsing libraries</li>
+                <li><strong>Performance Optimization:</strong> Caching, load balancing, and database indexing</li>
+                <li><strong>Security Hardening:</strong> Encryption, secure authentication, and regular security audits</li>
+            </ul>
+        </div>
+
+        <div class="mitigation-box">
+            <h4>🔒 Security Risk Mitigation</h4>
+            <ul>
+                <li><strong>Data Encryption:</strong> AES-256 encryption for sensitive data at rest and in transit</li>
+                <li><strong>Access Control:</strong> Role-based authentication with JWT tokens and session management</li>
+                <li><strong>Regular Audits:</strong> Quarterly security assessments and vulnerability scanning</li>
+                <li><strong>Backup Strategy:</strong> Automated daily backups with 30-day retention policy</li>
+            </ul>
+        </div>
+
+        <div class="contingency-box">
+            <h4>⚠️ Contingency Planning</h4>
+            <ul>
+                <li><strong>API Failure Response:</strong> Automatic switch to backup APIs within 30 seconds</li>
+                <li><strong>System Downtime Protocol:</strong> Maximum 4-hour recovery time objective (RTO)</li>
+                <li><strong>Data Recovery:</strong> Point-in-time recovery with 1-hour recovery point objective (RPO)</li>
+                <li><strong>Communication Plan:</strong> Immediate stakeholder notification and status updates</li>
+            </ul>
+        </div>
+
+        <h3>Risk Monitoring and Review</h3>
+        <div class="description">
+            <strong>Continuous Risk Assessment:</strong> The risk register will be reviewed bi-weekly during development phases and monthly during maintenance. Key performance indicators (KPIs) include system uptime (target: 99.5%), API response time (target: <2 seconds), and user satisfaction scores (target: >4.0/5.0).
+            
+            <br><br><strong>Risk Escalation Matrix:</strong>
+            <ul>
+                <li><strong>Low Risk:</strong> Managed by development team lead</li>
+                <li><strong>Medium Risk:</strong> Escalated to project manager within 24 hours</li>
+                <li><strong>High Risk:</strong> Immediate escalation to project stakeholders and management</li>
+                <li><strong>Critical Risk:</strong> Emergency response team activation and stakeholder notification</li>
+            </ul>
+        </div>
+
+        <h3>Risk Assessment Summary</h3>
+        <div class="table-caption">Table 4.5: Risk Distribution Summary</div>
+        <table class="risk-table">
+            <thead>
+                <tr>
+                    <th>Risk Level</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                    <th>Management Priority</th>
+                    <th>Review Frequency</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="risk-high">
+                    <td><strong>Critical/High Risk</strong></td>
+                    <td class="risk-id">3</td>
+                    <td>30%</td>
+                    <td>Immediate Action Required</td>
+                    <td>Daily Monitoring</td>
+                </tr>
+                <tr class="risk-medium">
+                    <td><strong>Medium Risk</strong></td>
+                    <td class="risk-id">5</td>
+                    <td>50%</td>
+                    <td>Active Management</td>
+                    <td>Weekly Review</td>
+                </tr>
+                <tr class="risk-low">
+                    <td><strong>Low Risk</strong></td>
+                    <td class="risk-id">2</td>
+                    <td>20%</td>
+                    <td>Monitor and Review</td>
+                    <td>Monthly Assessment</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="description">
+            The risk analysis reveals that 30% of identified risks are classified as high or critical, primarily related to technical dependencies and plagiarism detection accuracy. The comprehensive mitigation strategies and contingency plans ensure project resilience and successful delivery within acceptable risk parameters.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+    <h1>Test Page</h1>
+    <p>If you see this, the server is working</p>
+    <script>
+        fetch('/books')
+            .then(r => r.json())
+            .then(data => {
+                console.log('Books:', data);
+                document.body.innerHTML += '<p>Books loaded: ' + data.length + '</p>';
+            })
+            .catch(e => {
+                console.error('Error:', e);
+                document.body.innerHTML += '<p>Error loading books</p>';
+            });
+    </script>
+</body>
+</html>

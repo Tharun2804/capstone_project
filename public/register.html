@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="register-page">
+    <header>
+        <h1>Register a New User</h1>
+    </header>
+    <main>
+        <div id="statusMessage"></div>
+        <h2>Register</h2>
+        <form id="registerForm" enctype="multipart/form-data">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="tel" id="mobileNumber" placeholder="Mobile Number" required>
+            <select id="role" required>
+                <option value="" disabled selected>Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="reviewer">Reviewer</option>
+                <option value="publisher">Publisher</option>
+                <option value="student">Student</option>
+            </select>
+            
+            <!-- Reviewer-specific fields -->
+            <div id="reviewerFields" style="display: none;">
+                <h3>Reviewer Details</h3>
+                <input type="text" id="educationalQualification" placeholder="Educational Qualification (e.g., MBBS, BAMS, PhD)">
+                <input type="text" id="specialization" placeholder="Specialization/Subject Area (e.g., Ayurveda, Unani)">
+                <input type="number" id="yearsExperience" placeholder="Years of Experience" min="0">
+                <input type="text" id="currentDesignation" placeholder="Current Designation">
+                <input type="text" id="currentInstitution" placeholder="Current Institution/Organization">
+                <textarea id="publications" placeholder="Publications/Research Work (Optional)" rows="3"></textarea>
+                <select id="reviewerType">
+                    <option value="" disabled selected>Select Reviewer Type</option>
+                    <option value="subject-wise">Subject-wise Reviewer</option>
+                    <option value="book-type">Book Type Reviewer</option>
+                    <option value="general">General Reviewer</option>
+                </select>
+                <label for="proofDocuments">Upload Proof Documents (Degree, ID, CV):</label>
+                <input type="file" id="proofDocuments" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                <small>Upload degree certificate, ID proof, and CV (Multiple files allowed)</small>
+            </div>
+            
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </main>
+    <script src="auth.js"></script>
+</body>
+</html>

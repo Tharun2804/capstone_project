@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Debug - Reviewer Applications</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .section { margin: 20px 0; padding: 20px; border: 2px solid #3498db; background: #f8f9fa; }
+        button { padding: 10px 15px; margin: 5px; background: #3498db; color: white; border: none; cursor: pointer; }
+        .app-item { border: 1px solid #ddd; padding: 15px; margin: 10px 0; background: white; }
+        .pending { border-left: 5px solid orange; }
+        .approved { border-left: 5px solid green; }
+        .rejected { border-left: 5px solid red; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Admin Debug - Reviewer Applications</h1>
+    
+    <div class="section">
+        <h2>Step 1: Login as Admin</h2>
+        <input type="text" id="username" value="admin" placeholder="Username">
+        <input type="password" id="password" value="admin123" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <div id="loginStatus"></div>
+    </div>
+    
+    <div class="section">
+        <h2>Step 2: Reviewer Applications</h2>
+        <button onclick="loadApplications()">Load Applications</button>
+        <div id="applicationsContainer"></div>
+    </div>
+
+    <script>
+        let token = localStorage.getItem('token') || '';
+        
+        // Check if already logged in
+        if (token) {
+            document.getElementById('loginStatus').innerHTML = '✅ Already logged in';
+            loadApplications();
+        }
+        
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    token = data.token;
+                    localStorage.setItem('token', token);
+                    document.getElementById('loginStatus').innerHTML = `✅ Logged in as ${data.role}`;
+                    loadApplications();
+                } else {
+                    document.getElementById('loginStatus').innerHTML = `❌ ${data.message}`;
+                }
+            } catch (error) {
+                document.getElementById('loginStatus').innerHTML = `❌ Error: ${error.message}`;
+            }
+        }
+        
+        async function loadApplications() {
+            const container = document.getElementById('applicationsContainer');
+            container.innerHTML = '⏳ Loading applications...';
+            
+            if (!token) {
+                container.innerHTML = '❌ Please login first';
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:3000/admin/reviewer-applications', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const applications = await response.json();
+                console.log('Applications:', applications);
+                
+                if (applications.length === 0) {
+                    container.innerHTML = '📝 No reviewer applications found';
+                    return;
+                }
+                
+                let html = `<h3>Found ${applications.length} Applications:</h3>`;
+                
+                applications.forEach(app => {
+                    const statusClass = app.application_status;
+                    const statusEmoji = app.application_status === 'pending' ? '⏳' : 
+                                       app.application_status === 'approved' ? '✅' : '❌';
+                    
+                    html += `
+                        <div class="app-item ${statusClass}">
+                            <h4>${statusEmoji} ${app.username} (${app.application_status.toUpperCase()})</h4>
+                            <p><strong>Qualification:</strong> ${app.educational_qualification || 'N/A'}</p>
+                            <p><strong>Specialization:</strong> ${app.specialization || 'N/A'}</p>
+                            <p><strong>Experience:</strong> ${app.years_experience || 0} years</p>
+                            <p><strong>Institution:</strong> ${app.current_institution || 'N/A'}</p>
+                            <p><strong>Applied:</strong> ${new Date(app.created_at).toLocaleDateString()}</p>
+                            ${app.application_status === 'pending' ? `
+                                <button onclick="approve(${app.id})" style="background: green;">✅ Approve</button>
+                                <button onclick="reject(${app.id})" style="background: red;">❌ Reject</button>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+                
+            } catch (error) {
+                container.innerHTML = `❌ Error loading applications: ${error.message}`;
+                console.error('Error:', error);
+            }
+        }
+        
+        async function approve(id) {
+            try {
+                const response = await fetch(`http://localhost:3000/admin/reviewer-applications/${id}/approve`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    alert('✅ Reviewer approved!');
+                    loadApplications();
+                } else {
+                    alert('❌ ' + data.message);
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+        
+        async function reject(id) {
+            const reason = prompt('Enter rejection reason:') || 'No reason provided';
+            
+            try {
+                const response = await fetch(`http://localhost:3000/admin/reviewer-applications/${id}/reject`, {
+                    method: 'PUT',
+                    headers: { 
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ rejectionReason: reason })
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    alert('❌ Reviewer rejected!');
+                    loadApplications();
+                } else {
+                    alert('❌ ' + data.message);
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

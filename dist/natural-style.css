@@ -1,0 +1,159 @@
+/* professional-style.css */
+
+/* Custom Color Palette */
+:root {
+    --primary-color: #34495e;  /* Dark Blue-Gray */
+    --secondary-color: #2c3e50; /* A darker shade for accents */
+    --accent-color: #e74c3c;    /* Red for alerts */
+    --background-color: #f4f6f8; /* Light Gray for background */
+    --card-background: #ffffff;
+    --text-color: #333333;
+    --light-text-color: #666666;
+    --border-color: #e1e1e1;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+}
+
+/* General Body and Font Styling */
+body {
+    font-family: 'Inter', sans-serif; /* A professional-looking font */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased; /* Smoother font rendering */
+}
+
+/* Header and Navigation */
+header {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px var(--shadow-medium);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+nav a:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Main Content and Containers */
+main {
+    padding: 2rem;
+    max-width: 960px;
+    margin: 2rem auto;
+}
+
+.card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow-light);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+h2, h3 {
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Form and Input Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(52, 73, 94, 0.1);
+    outline: none;
+}
+
+/* Button Styling */
+button[type="submit"],
+.button-group button {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 0.9rem 1.75rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px var(--shadow-light);
+}
+
+button[type="submit"]:hover,
+.button-group button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+/* Specific Alert/Status Messages */
+.alert-message {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    text-align: center;
+    border-left: 5px solid;
+}
+
+.alert-message.error {
+    background-color: #f8d7da;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.alert-message.success {
+    background-color: #d4edda;
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.alert-message.info {
+    background-color: #d1ecf1;
+    color: #17a2b8;
+    border-color: #17a2b8;
+}

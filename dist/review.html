@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Textbook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="student-dashboard.html" id="backLink">⬅️ Back to Dashboard</a>
+        <h1 id="bookTitleDisplay"></h1>
+        <nav>
+            <a href="#" id="logoutBtn">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <div id="reviewSummary">
+            <h3>Review Summary</h3>
+            <p><strong>Average Rating:</strong> <span id="avgRating"></span> / 5</p>
+            <p><strong>Total Reviews:</strong> <span id="totalReviews"></span></p>
+            <p><strong>Average Accuracy:</strong> <span id="avgAccuracy"></span> / 5</p>
+            <p><strong>Average Clarity:</strong> <span id="avgClarity"></span> / 5</p>
+            <p><strong>Average Relevance:</strong> <span id="avgRelevance"></span> / 5</p>
+            <p><strong>Average References Quality:</strong> <span id="avgReferences"></span> / 5</p>
+        </div>
+
+        <div id="reviewFormContainer">
+            <h3>Submit a New Review</h3>
+            <form id="reviewForm">
+                <input type="hidden" id="textbookId">
+                <label for="reviewerName">Your Name:</label>
+                <input type="text" id="reviewerName" required>
+
+                <label for="rating">Overall Rating (1-5):</label>
+                <input type="number" id="rating" min="1" max="5" required>
+
+                <label for="accuracy">Accuracy (1-5):</label>
+                <input type="number" id="accuracy" min="1" max="5" required>
+                
+                <label for="clarity">Clarity (1-5):</label>
+                <input type="number" id="clarity" min="1" max="5" required>
+
+                <label for="relevance">Relevance (1-5):</label>
+                <input type="number" id="relevance" min="1" max="5" required>
+
+                <label for="referencesQuality">References Quality (1-5):</label>
+                <input type="number" id="referencesQuality" min="1" max="5" required>
+
+                <label for="comments">Comments:</label>
+                <textarea id="comments" rows="4"></textarea>
+
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+
+        <div id="detailedReviews">
+            <h3>All Reviews</h3>
+            <ul id="reviewsList"></ul>
+        </div>
+    </main>
+    <script src="review.js"></script>
+</body>
+
+
+
+</html>

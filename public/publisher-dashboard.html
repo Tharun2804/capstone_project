@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publisher Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Publisher Dashboard</h1>
+        <nav>
+            <a href="#" id="logoutBtn">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Add a New Textbook</h2>
+        <div id="statusMessage"></div>
+        <!-- <form id="addBookForm">
+            <input type="text" id="bookTitle" placeholder="Title" required>
+            <input type="text" id="bookAuthor" placeholder="Author" required>
+            <input type="number" id="bookYear" placeholder="Year" required>
+            <input type="file" id="bookFile" required>
+            <button type="submit">Upload Book</button>
+        </form> -->
+        <form id="addBookForm">
+    <input type="text" id="bookTitle" placeholder="Title" required>
+    <input type="text" id="bookAuthor" placeholder="Author" required>
+    <input type="number" id="bookYear" placeholder="Year" required>
+    <textarea id="bookDescription" placeholder="Description" required></textarea>
+    <input type="file" id="bookFile" required>
+    <button type="submit">Upload Book</button>
+</form>
+    </main>
+    <script src="publisher.js"></script>
+</body>
+</html>

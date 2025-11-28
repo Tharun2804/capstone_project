@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Reviewer Admin</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        button { padding: 10px; margin: 5px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Test Reviewer Admin Functions</h1>
+    
+    <div class="section">
+        <h3>1. Login as Admin</h3>
+        <input type="text" id="username" placeholder="Username" value="admin">
+        <input type="password" id="password" placeholder="Password" value="admin123">
+        <button onclick="loginAdmin()">Login</button>
+        <div id="loginResult"></div>
+    </div>
+    
+    <div class="section">
+        <h3>2. Fetch Reviewer Applications</h3>
+        <button onclick="fetchApplications()">Get Applications</button>
+        <div id="applicationsResult"></div>
+    </div>
+    
+    <div class="section">
+        <h3>3. Test Approve/Reject</h3>
+        <input type="number" id="reviewerId" placeholder="Reviewer ID">
+        <button onclick="approveReviewer()">Approve</button>
+        <button onclick="rejectReviewer()">Reject</button>
+        <div id="actionResult"></div>
+    </div>
+
+    <script>
+        let token = '';
+        
+        async function loginAdmin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    token = data.token;
+                    document.getElementById('loginResult').innerHTML = 
+                        `<span class="success">✓ Logged in as ${data.role}</span>`;
+                } else {
+                    document.getElementById('loginResult').innerHTML = 
+                        `<span class="error">✗ ${data.message}</span>`;
+                }
+            } catch (error) {
+                document.getElementById('loginResult').innerHTML = 
+                    `<span class="error">✗ Error: ${error.message}</span>`;
+            }
+        }
+        
+        async function fetchApplications() {
+            if (!token) {
+                document.getElementById('applicationsResult').innerHTML = 
+                    '<span class="error">Please login first</span>';
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:3000/admin/reviewer-applications', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    document.getElementById('applicationsResult').innerHTML = 
+                        `<span class="success">✓ Found ${data.length} applications</span><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    document.getElementById('applicationsResult').innerHTML = 
+                        `<span class="error">✗ ${data.message || data.error}</span>`;
+                }
+            } catch (error) {
+                document.getElementById('applicationsResult').innerHTML = 
+                    `<span class="error">✗ Error: ${error.message}</span>`;
+            }
+        }
+        
+        async function approveReviewer() {
+            const id = document.getElementById('reviewerId').value;
+            if (!token || !id) {
+                document.getElementById('actionResult').innerHTML = 
+                    '<span class="error">Please login and enter reviewer ID</span>';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`http://localhost:3000/admin/reviewer-applications/${id}/approve`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                document.getElementById('actionResult').innerHTML = 
+                    response.ok ? 
+                    `<span class="success">✓ ${data.message}</span>` :
+                    `<span class="error">✗ ${data.message || data.error}</span>`;
+            } catch (error) {
+                document.getElementById('actionResult').innerHTML = 
+                    `<span class="error">✗ Error: ${error.message}</span>`;
+            }
+        }
+        
+        async function rejectReviewer() {
+            const id = document.getElementById('reviewerId').value;
+            const reason = prompt('Rejection reason:') || 'No reason provided';
+            
+            if (!token || !id) {
+                document.getElementById('actionResult').innerHTML = 
+                    '<span class="error">Please login and enter reviewer ID</span>';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`http://localhost:3000/admin/reviewer-applications/${id}/reject`, {
+                    method: 'PUT',
+                    headers: { 
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ rejectionReason: reason })
+                });
+                
+                const data = await response.json();
+                document.getElementById('actionResult').innerHTML = 
+                    response.ok ? 
+                    `<span class="success">✓ ${data.message}</span>` :
+                    `<span class="error">✗ ${data.message || data.error}</span>`;
+            } catch (error) {
+                document.getElementById('actionResult').innerHTML = 
+                    `<span class="error">✗ Error: ${error.message}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
